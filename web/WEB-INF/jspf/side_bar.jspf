@@ -1,0 +1,5 @@
+<%-- any content can be specified here e.g.: --%>
+<aside id="bannerpublicitario" class="col-sm-12 col-md-3">
+        <img src="image/bannerpublicitario.jpg" alt="bannerpublicitario">
+        <img src="image/bannerpublicitario2.jpg" alt="bannerpublicitario2">
+    </aside>

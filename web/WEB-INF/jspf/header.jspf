@@ -1,0 +1,10 @@
+<%-- any content can be specified here e.g.: --%>
+<header class="row">
+    <section id="logo" class="col-2">
+            <img src="image/logo.jpg">
+    </section>
+
+    <section id="bannerprincipal" class="col-10">
+            <img src="image/Banner-escuela-de-futbol.jpg" alt="Banner-escuela-de-futbol">
+    </section>
+</header>

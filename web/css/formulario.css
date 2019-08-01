@@ -1,0 +1,32 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+body{
+    color: black;
+    text-align: center;
+}
+
+section{
+    border: 1px solid white;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px;
+}
+
+section table{
+    display: flex;
+    padding: 30px;
+}
+
+#formulario td{
+    text-align: left;
+    background: beige;
+}
+
+.subtitle{
+    text-align: center !important;
+}

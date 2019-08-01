@@ -1,0 +1,72 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+nav{
+    width: 99%;
+    border-left: 1px solid;
+    border-right: 1px solid;
+    margin: 0;
+}
+
+#menu{
+    margin:auto;
+    width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    background: rgb(70, 114, 3);
+}
+
+/*eliminar viñetas*/
+ul{
+    list-style: none;
+    display: flex;
+}
+/*Alinear el menu principal horizontalmente*/
+.desplegable > li{
+    display: flex;
+    flex-direction: column;
+}
+
+/*Formato del menu*/
+.desplegable li a{
+    background-color: blue;
+    color:azure;
+    text-decoration: none;
+    padding: 15px;
+    display:block;
+}
+
+/*Ocultar submenus*/
+.desplegable li ul{
+    display: none;
+    position: absolute;
+    min-width: 50px;
+    flex-direction: column; 
+}
+.desplegable li ul li{
+    width: 150px;
+}
+/*Desplegar submenus*/
+.desplegable li:hover div > ul{
+    display: flex;
+}
+
+.desplegable li div {
+    display: flex;
+}
+
+.desplegable li ul li{
+    position: relative;
+}
+/*Desplazar los submenus al lado derecho*/
+.desplegable li il li {
+    right: -100px;
+    top: 0px;
+}
+
+/*Efecto*/
+.desplegable li a:hover {
+    background-color: darkgray;
+    color: black;
+}
