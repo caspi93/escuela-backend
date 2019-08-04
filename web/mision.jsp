@@ -8,7 +8,7 @@
         <%@include file="WEB-INF/jspf/menu.jspf" %>
         <div id="container" class="row">
             <main id="content" class="col-sm-12 col-md-9">
-                <section>
+                <section class="contenido">
                     <article>
                         <h1 class="title"> Misión</h1>
                         <p class="text">La escuela de fútbol Talento Pivijayero tiene como finalidad impulsar el deporte 

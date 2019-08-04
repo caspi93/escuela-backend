@@ -7,7 +7,7 @@
         <%@include file="WEB-INF/jspf/menu.jspf" %>
         <div id="container" class="row">
             <main id="content" class="col-sm-12 col-md-9">
-                <section>
+                <section class="contenido">
                     <article>
                         <h1 class="title">Bienvenidos</h1>
                         <p class="text">Nuestra escuela de fútbol Talento Pivijayero te invita a que hagas parte de la recreación y el deporte.

@@ -57,19 +57,19 @@ nav{
     padding: 0%;
 }
 
-section{
-    width: 100%;
-    padding: 0%;
+.contenido {
+  width: 100%;
+  padding: 0%;  
 }
 
-iframe.principal {
+/*iframe.principal {
     margin-left: auto;
     margin-right: auto;
     display: block;
     border: none;
     overflow-y: hidden;
     min-height: 800px;
-}
+}*/
 
 .video {
     /*display: flex;
@@ -136,5 +136,14 @@ footer div{
         display: flex;
         justify-content: center;
         padding-top: 200px;
-    }
+}
+
+
+.subtitle{
+    text-align: center !important;
+}
+
+#titulo{
+   text-align: center !important; 
+}
 

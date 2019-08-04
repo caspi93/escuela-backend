@@ -10,9 +10,9 @@
                 <section>
                     <div id="container" class="row">
                         <main id="content" class="col-sm-12 col-md-9">
-                            <section>
+                            <section class="contenido-formulario">
                                 <div class="container">
-                                    <h1>Incie Sesión Aquí</h1>
+                                    <h1 id="titulo">Incie Sesión Aquí</h1>
                                     <div class="row justify-content-center">
                                         <form class="col-sm-10 col-md-6">
                                             <div class="form-group">

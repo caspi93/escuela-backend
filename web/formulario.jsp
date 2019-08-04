@@ -8,13 +8,13 @@
         <%@include file="WEB-INF/jspf/menu.jspf" %>
         <div id="container" class="row">
             <main id="content" class="col-sm-12 col-md-9">
-                <section>
+                <section class="contenido-formulario">
                     <div class="container">
-                        <h1>Escuela de fútbol Talento Pivijayero</h1>
+                        <h1 id="titulo">Escuela de fútbol Talento Pivijayero</h1>
                         <div class="row justify-content-center">
                             <form class="col-sm-10 col-md-6">
                                 <div class="form-group">
-                                    <h3>Datos del alumno</h3>
+                                    <h3 class="subtitle">Datos del alumno</h3>
                                     <label for="nombres">Primer Nombre</label>
                                     <input type="text" class="form-control" id="nombres" placeholder="Primer Nombre - Alumno">
                                 </div>
@@ -22,7 +22,7 @@
                                     <label for="apellidos">Primer Apellido</label>
                                     <input type="text" class="form-control" id="Apellidos" placeholder="Primer Apellido - Alumno">
                                 </div>
-                                <h3>Datos del acudiente</h3>
+                                <h3 class="subtitle">Datos del acudiente</h3>
                                 <div class="form-group">
                                     <label for="nombres-acudiente">Primer Nombre</label>
                                     <input type="text" class="form-control" id="nombres-acudiente" placeholder="Primer Nombre - Acudiente">

@@ -8,7 +8,7 @@ body{
     text-align: center;
 }
 
-section{
+.contenido-formulario{
     border: 1px solid white;
     border-radius: 3px;
     display: flex;
@@ -30,3 +30,4 @@ section table{
 .subtitle{
     text-align: center !important;
 }
+

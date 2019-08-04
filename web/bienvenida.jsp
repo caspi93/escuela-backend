@@ -10,8 +10,8 @@
 <body>
     <article>
         <h1 class="title">Bienvenidos</h1>
-        <p class="text">Nuestra escuela de fÃºtbol Talento Pivijayero te invita a que hagas parte de la recreaciÃ³n y el deporte.
-        Te invitamos a que incorpores a tu niÃ±o a nuestro club deportivo, donde va a tener la oportunidad para desarrollar sus cualidades deportivas y sociales.
+        <p class="text">Nuestra escuela de fútbol Talento Pivijayero te invita a que hagas parte de la recreación y el deporte.
+        Te invitamos a que incorpores a tu niño a nuestro club deportivo, donde va a tener la oportunidad para desarrollar sus cualidades deportivas y sociales.
         No pierdas esta gran oportunidad, te esperamos.</p>
 
         <h3 id="subtitle">Dr. Olmedo Pedroza</h3> 
