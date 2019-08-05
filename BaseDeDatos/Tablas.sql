@@ -38,8 +38,12 @@ constraint TiposDeDocumentoId foreign key(TiposDeDocumentoId)
 references TiposDeDocumento(id)
 );
 
+alter table Personas add Direccion varchar(150);
+
 create table Usuarios(
 id int identity(1,1) primary key not null,
+Correo varchar(50) not null,
+Celular varchar(12),
 NombreUsuario varchar(20) not null,
 Clave varchar(8) not null, 
 PersonaId int not null,
@@ -49,6 +53,7 @@ RolId int not null,
 constraint RolId foreign key(RolId)
 references Roles(id)
 );
+
 
 create table Acudientes(
 id int identity(1,1) primary key not null,
@@ -85,6 +90,12 @@ constraint AlumnosTallaId foreign key(TallaId)
 references Tallas(id)
 );
 
+alter table Alumnos add EstadoId int not null,
+constraint  AlumnoIdEstadosAlumnosId foreign key(EstadoId)
+references EstadosAlumnos(id);
+
+alter table Personas drop column Direccion;
+
 create table Permisos(
 id int identity(1,1) primary key not null,
 Codigo varchar(50) not null
@@ -103,6 +114,17 @@ constraint fk_PermisosPorRoles_Permisos
 		on update cascade
 		on delete cascade
 );
+
+create table EstadosAlumnos(
+id int primary key not null,
+Nombre varchar(15) not null,
+);
+
+
+
+
+
+
 
 
 
