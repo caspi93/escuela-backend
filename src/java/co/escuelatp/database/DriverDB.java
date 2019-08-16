@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  */
 public class DriverDB {
     private static final String BDNAME = "EscuelaDeFutbolTP";
-    private static final String USER = "user";
+    private static final String USER = "luisk";
     private static final String PASSWORD = "lmuairsy001993";
     private static final String URL = "jdbc:sqlserver://localhost;databaseName=" +
             BDNAME + ";user=" + USER + ";password=" + PASSWORD + ";";
@@ -41,6 +41,7 @@ public class DriverDB {
             return DriverManager.getConnection(URL);
         } catch (SQLException ex) {
             Logger.getLogger(co.escuelatp.database.DriverDB.class.getName()).log(Level.SEVERE, null, ex);
+            System.exit(1);
         }
         
         return null;

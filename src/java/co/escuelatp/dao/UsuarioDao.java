@@ -29,14 +29,14 @@ public class UsuarioDao {
     }
     
     public Usuario login(String nombreUsuario, String clave){
-        
+        System.out.println(nombreUsuario + " -- " + clave);
         Usuario u = null;
         
         
         String consulta = "select * from Usuarios u\n" +
             "inner join Personas p\n" +
             "on u.PersonaId = p.Id\n" +
-            "where u.NombreUsuario = '?' and u.Clave = '?';";
+            "where u.NombreUsuario = ? and u.Clave = ?;";
         PreparedStatement statement = null;
                     
         try { 
