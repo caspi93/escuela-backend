@@ -57,6 +57,7 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="usuarios.jsp">Usuarios</a>
           <a class="dropdown-item" href="alumnos.jsp">Alumnos</a>
+          <a class="dropdown-item" href="index.jsp">Cerrar sesión</a>
         </div>
       </li>
     </ul>

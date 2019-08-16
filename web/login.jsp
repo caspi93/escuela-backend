@@ -17,15 +17,21 @@
                                         <form class="col-sm-10 col-md-6" method="POST" action="login">
                                             <div class="form-group">
                                                 <label for="nombres">Nombre de Usuario</label>
-                                                <input type="text" class="form-control" id="nombreUsuario" placeholder="Nombre de Usuario">
+                                                <input type="text" class="form-control" id="nombreUsuario" name="nombreUsuario" placeholder="Nombre de Usuario">
                                             </div>
                                             <div class="form-group">
                                                 <label for="apellidos">Contraseña</label>
-                                                <input type="password" class="form-control" id="clave" placeholder="Contraseña">
+                                                <input type="password" class="form-control" id="clave" name="clave" placeholder="Contraseña">
                                             </div>
                                             <button type="submit" class="btn btn-primary">Entrar</button>
                                         </form>
                                     </div>
+                                    <%if(request.getAttribute("INVALIDO") != null) {
+                                            %><div class="alert alert-danger" role="alert">
+                                                Usuario o clave incorrecta!
+                                              </div><%
+                                        }
+                                        %>
                                 </div>
                             </section>
                         </main>
