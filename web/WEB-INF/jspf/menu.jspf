@@ -42,6 +42,8 @@
           <a class="dropdown-item" href="">CEL: 3023797554</a>
         </div>
       </li>
+      <% if(session.getAttribute("USUARIO") == null) {
+            %>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Iniciar Sesión
@@ -50,6 +52,9 @@
           <a class="dropdown-item" href="login.jsp">Iniciar Sesión</a>
         </div>
       </li>
+                 <% }
+                  %>
+      
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Administrar
@@ -57,7 +62,7 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="usuarios.jsp">Usuarios</a>
           <a class="dropdown-item" href="alumnos.jsp">Alumnos</a>
-          <a class="dropdown-item" href="index.jsp">Cerrar sesión</a>
+          <a class="dropdown-item" href="LogoutControlador">Cerrar sesión</a>
         </div>
       </li>
     </ul>
