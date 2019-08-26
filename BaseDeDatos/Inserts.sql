@@ -25,7 +25,7 @@ insert into Usuarios (Correo, Celular, NombreUsuario, Clave, PersonaId, RolId)
 values ('luisk301374@gmail.com', '3004255615','luisk','lmuairsy',2, 1);
 
 insert into Usuarios (Correo, Celular, NombreUsuario, Clave, PersonaId, RolId)
-values ('olrape67@gmail.com', '3023797554','olrape','o7594393',3, 2);
+values ('olrape67@gmail.com', '3023797554','olrape','o7594393',2, 2);
 
 -- Super Administrador
 insert into PermisosPorRoles (idRol, idPermisos) values (1,1);
@@ -34,7 +34,9 @@ insert into PermisosPorRoles (idRol, idPermisos) values (1,3);
 insert into PermisosPorRoles (idRol, idPermisos) values (1,4);
 insert into PermisosPorRoles (idRol, idPermisos) values (1,5);
 insert into PermisosPorRoles (idRol, idPermisos) values (1,6);
-insert into PermisosPorRoles (idRol, idPermisos) values (1,7);
+insert into PermisosPorRoles (idRol, idPermisos) values (1,1005);
+insert into PermisosPorRoles (idRol, idPermisos) values (1,1006);
+insert into PermisosPorRoles (idRol, idPermisos) values (1,1007);
 
 -- Administrador
 insert into PermisosPorRoles (idRol, idPermisos) values (2,1);
@@ -43,7 +45,12 @@ insert into PermisosPorRoles (idRol, idPermisos) values (2,3);
 insert into PermisosPorRoles (idRol, idPermisos) values (2,4);
 insert into PermisosPorRoles (idRol, idPermisos) values (2,5);
 insert into PermisosPorRoles (idRol, idPermisos) values (2,6);
+insert into PermisosPorRoles (idRol, idPermisos) values (2,1006);
+insert into PermisosPorRoles (idRol, idPermisos) values (2,1007);
+
 
 -- Entrenador
 insert into PermisosPorRoles (idRol, idPermisos) values (3,4);
 insert into PermisosPorRoles (idRol, idPermisos) values (3,5);
+insert into PermisosPorRoles (idRol, idPermisos) values (3,1007);
+
