@@ -1,70 +1,74 @@
 <%-- any content can be specified here e.g.: --%>
+<%@page import="co.escuelatp.modelos.Usuario"%>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="video.html" target="principal">Talento Pivijayero</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+    <a class="navbar-brand" href="video.html" target="principal">Talento Pivijayero</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="index.jsp">Inicio<span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Información
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="formulario.jsp">Inscripciones</a>
-          <a class="dropdown-item" href="matriculas.jsp">Mátriculas</a>
-          <a class="dropdown-item" href="practicas.jsp">Prácticas</a>
-          <a class="dropdown-item" href="#">Partidos</a>
-        </div>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Quienes somos
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="mision.jsp">Misión</a>
-          <a class="dropdown-item" href="vision.jsp">Visión</a>
-        </div>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="mapa.jsp">Ubicación<span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Contactos
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="">OLRAPE67@GMAIL.COM</a>
-          <a class="dropdown-item" href="">CEL: 3023797554</a>
-        </div>
-      </li>
-      <% if(session.getAttribute("USUARIO") == null) {
-            %>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Iniciar Sesión
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="login.jsp">Iniciar Sesión</a>
-        </div>
-      </li>
-                 <% }
-                  %>
-      
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Administrar
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="usuarios.jsp">Usuarios</a>
-          <a class="dropdown-item" href="alumnos.jsp">Alumnos</a>
-          <a class="dropdown-item" href="LogoutControlador">Cerrar sesión</a>
-        </div>
-      </li>
-    </ul>
-  </div>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="index.jsp">Inicio<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Información
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="formulario.jsp">Inscripciones</a>
+                    <a class="dropdown-item" href="matriculas.jsp">Mátriculas</a>
+                    <a class="dropdown-item" href="practicas.jsp">Prácticas</a>
+                    <a class="dropdown-item" href="#">Partidos</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Quienes somos
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="mision.jsp">Misión</a>
+                    <a class="dropdown-item" href="vision.jsp">Visión</a>
+                </div>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="mapa.jsp">Ubicación<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Contactos
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="">OLRAPE67@GMAIL.COM</a>
+                    <a class="dropdown-item" href="">CEL: 3023797554</a>
+                </div>
+            </li>
+            <% Usuario usuario = (Usuario) session.getAttribute("USUARIO");
+          if (usuario == null) { %>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Iniciar Sesión
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="login.jsp">Iniciar Sesión</a>
+                </div>
+            </li>
+            <% } else { %>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Administrar
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <% if (usuario.verificarPermiso("VER_USUARIOS")) { %>
+                    <a class="dropdown-item" href="usuarios.jsp">Usuarios</a>
+                    <% } %>
+                    <% if (usuario.verificarPermiso("VER_ALUMNOS")) { %>
+                    <a class="dropdown-item" href="alumnos.jsp">Alumnos</a>
+                    <% } %>
+                    <a class="dropdown-item" href="LogoutControlador">Cerrar sesión</a>
+                </div>
+            </li>
+            <% }%>
+        </ul>
+    </div>
 </nav>
