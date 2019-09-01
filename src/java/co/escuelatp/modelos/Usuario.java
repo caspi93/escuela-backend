@@ -1,5 +1,7 @@
 package co.escuelatp.modelos;
+
 public class Usuario extends Persona {
+
     // Atributos
     private int id;
     private String nombreUsuario;
@@ -7,7 +9,7 @@ public class Usuario extends Persona {
     private Rol rol;
     private String correo;
     private String celular;
-   
+
     /*
     * Método constructor que recibe la id como parámetro
      */
@@ -73,30 +75,37 @@ public class Usuario extends Persona {
     /*
      * Método get del campo correo
      */
-
     public String getCorreo() {
         return correo;
     }
-    
+
     /*
      * Método set del campo correo
-    */
+     */
     public void setCorreo(String correo) {
         this.correo = correo;
     }
-    
+
     /*
      * Método get del campo celular
      */
-
     public String getCelular() {
         return celular;
     }
-    
+
     /*
      * Método set del campo celular
-    */
+     */
     public void setCelular(String celular) {
         this.celular = celular;
+    }
+
+    public boolean verificarPermiso(String codigo) {
+        for (Permiso p : rol.getPermisos()) {
+            if (codigo.equals(p.getCodigo())) {
+                return true;
+            }
+        }
+        return false;
     }
 }

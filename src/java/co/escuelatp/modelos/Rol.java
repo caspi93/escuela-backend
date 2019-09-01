@@ -21,7 +21,13 @@ public class Rol {
     public void asignarPermisos(Permiso permiso) {
         permisos.add(permiso);
     }
-
+    
+    /*
+    * Método get de la lista de permisos
+    */
+    public ArrayList<Permiso> getPermisos(){
+        return permisos;
+    }
     /*
     ¨* Método get del campo rolId
      */
