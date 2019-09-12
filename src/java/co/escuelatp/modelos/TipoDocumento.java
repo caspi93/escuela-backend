@@ -6,10 +6,21 @@ public class TipoDocumento {
     private String nombre;
     private String nombreCorto;
 
+     /*
+    * Método constructor que recibe como parámetro la id
+     */
     public TipoDocumento(int id) {
         this.id = id;
         this.nombre = null;
         this.nombreCorto = null;
+    }
+    /*
+    * Método constructor que recibe como parámetro la id y el nombre corto
+     */
+     public TipoDocumento(int id, String nombreCorto) {
+        this.id = id;
+        this.nombre = null;
+        this.nombreCorto = nombreCorto;
     }
 
     /*

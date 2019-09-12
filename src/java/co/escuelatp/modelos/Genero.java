@@ -12,6 +12,14 @@ public class Genero {
         this .id = id;
         this.nombre = null;
     }
+    
+    /*
+    * Método constructor que recibe como parámetro la id y el nombre
+     */
+    public  Genero(int id, String nombre) {
+        this .id = id;
+        this.nombre = nombre;
+    }
 
     /*
      * Método get del campo id

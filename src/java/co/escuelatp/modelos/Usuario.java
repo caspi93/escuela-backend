@@ -22,6 +22,19 @@ public class Usuario extends Persona {
         this.correo = null;
         this.celular = null;
     }
+    
+     /*
+    * Método constructor que recibe la id como parámetro
+     */
+    public Usuario() {
+        this.id = 0;
+        this.nombreUsuario = null;
+        this.clave = null;
+        this.rol = null;
+        this.idPersona = 0;
+        this.correo = null;
+        this.celular = null;
+    }
 
     /*
     * Método get del campo id
@@ -98,6 +111,13 @@ public class Usuario extends Persona {
      */
     public void setCelular(String celular) {
         this.celular = celular;
+    }
+    
+    /*
+    *Método set del campo id
+     */
+    public void setId(int id) {
+        this.id = id;
     }
 
     public boolean verificarPermiso(String codigo) {

@@ -33,6 +33,4 @@ public class LogoutControlador extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
         dispatcher.forward(request, response);
     }
-
-   
 }

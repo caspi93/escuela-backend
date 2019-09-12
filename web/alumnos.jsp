@@ -10,7 +10,9 @@
                 <div class="horario-practica" class="col-sm-9 col-md-12">
                     <h3>Lista de Alumnos</h3>
                     <div class="form-group col-sm-12">
-                        <button type="submit" class="btn btn-primary">Crear</button>
+                        <% if (usuario.verificarPermiso("CREAR_ALLUMNO")) { %>
+                        <a class="btn btn-primary" href="matriculas.jsp">Crear</a>
+                        <% } %>
                     </div>
                     <table class="table table-hover table-dark">
                         <thead>

@@ -8,10 +8,19 @@ public class Rol {
     private String nombre;
     private ArrayList<Permiso> permisos;
 
-    //Método constructor
+    //Método constructor que recibe como parámetro la id
     public Rol(int id) {
         this.id = id;
         this.nombre = null;
+        this.permisos = new ArrayList<>();
+    }
+    
+     /*
+    * Método constructor que recibe como parámetro la id y el nombre
+    */
+    public Rol(int id, String nombre) {
+        this.id = id;
+        this.nombre = nombre;
         this.permisos = new ArrayList<>();
     }
     

@@ -9,8 +9,14 @@
             <main class="row justify-content-center" class ="horario">
                 <div class="horario-practica" class="col-sm-9 col-md-12">
                     <h3>Lista de Usuarios</h3>
+                    
+                    <%@page import="co.escuelatp.modelos.Usuario, java.util.ArrayList" %>
+                    
+                    <% ArrayList<Usuario> usuarios = (ArrayList<Usuario>)request.getAttribute("Usuarios");%>
                     <div class="form-group col-sm-12">
-                        <button type="submit" class="btn btn-primary">Crear</button>
+                        <% if (usuario.verificarPermiso("CREAR_USUARIO")) { %>
+                        <a class="btn btn-primary" href="registro.jsp">Crear</a>
+                        <% } %>
                     </div>
                     <table class="table table-hover table-dark">
                         <thead>
@@ -26,16 +32,17 @@
                                 <th scope="col">Opciones</th>
                             </tr>
                         </thead>
+                        <% for(Usuario u: usuarios){%>
                         <tbody>
                             <tr>
                                 <th scope="row">Semana 1</th>
-                                <td>04:00 pm</td>
-                                <td>05:00 pm</td>
-                                <td>05:00 pm</td>
-                                <td>05:00 pm</td>
-                                <td>05:00 pm</td>
-                                <td>05:00 pm</td>
-                                <td>05:00 pm</td>
+                                 <td><%= u.getPrimerNombre() + " " + u.getSegundoNombre() %></td>
+                    <td><%= u.getPrimerApellido() + " " + u.getSegundoApellido() %></td>
+                    <td><%= u.getTipoDocumento().getNombreCorto() %></td>
+                    <td><%= u.getNumeroDocumento()%></td>
+                    <td><%= u.getCelular()%></td>
+                    <td><%= u.getCorreo()%></td>
+                    <td><%= u.getDireccion()%></td>
                                 <td><a class="btn btn-primary" href="#" role="button">Editar</a>
                                 <a class="btn btn-danger" href="#" role="button">Eliminar</a></td>
                             </tr>

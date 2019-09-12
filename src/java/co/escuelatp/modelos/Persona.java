@@ -10,6 +10,7 @@ public class Persona {
     private Genero genero;
     private TipoDocumento tipoDocumento;
     private String numeroDocumento;
+    private String direccion;
 
       /*
     * Método constructor por defecto
@@ -23,6 +24,7 @@ public class Persona {
         this.genero = null;
         this.tipoDocumento = null;
         this.numeroDocumento = null;
+        this.direccion = null;
     }
     /*
     * Método constructor que recibe la id como parámetro
@@ -36,6 +38,7 @@ public class Persona {
         this.genero = null;
         this.tipoDocumento = null;
         this.numeroDocumento = null;
+        this.direccion = null;
     }
 
     /*
@@ -43,6 +46,13 @@ public class Persona {
      */
     public int getIdPerona() {
         return idPersona;
+    }
+    
+     /*
+    * Método set del campo id
+     */
+    public void setIdPersona(int idPersona) {
+        this.idPersona = idPersona;
     }
 
     /*
@@ -145,5 +155,20 @@ public class Persona {
         this.numeroDocumento = numeroDocumento;
     }
 
+    /*
+     * Método get del campo Direccion
+     */
+    public String getDireccion() {
+        return direccion;
+    }
+    
+    /*
+     * Método set del campo Direccion
+     */
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+    
+    
     
 }
