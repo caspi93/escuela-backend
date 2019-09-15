@@ -17,7 +17,6 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="formulario.jsp">Inscripciones</a>
-                    <a class="dropdown-item" href="matriculas.jsp">Mátriculas</a>
                     <a class="dropdown-item" href="practicas.jsp">Prácticas</a>
                     <a class="dropdown-item" href="#">Partidos</a>
                 </div>
@@ -44,7 +43,7 @@
                 </div>
             </li>
             <% Usuario usuario = (Usuario) session.getAttribute("USUARIO");
-          if (usuario == null) { %>
+            if (usuario == null) { %>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Iniciar Sesión
@@ -60,10 +59,10 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <% if (usuario.verificarPermiso("VER_USUARIOS")) { %>
-                    <a class="dropdown-item" href="usuarios.jsp">Usuarios</a>
+                    <a class="dropdown-item" href="listaUsuarios">Usuarios</a>
                     <% } %>
-                    <% if (usuario.verificarPermiso("VER_ALUMNOS")) { %>
-                    <a class="dropdown-item" href="alumnos.jsp">Alumnos</a>
+                    <% if (usuario.verificarPermiso("VER_ALMUNOS")) { %>
+                    <a class="dropdown-item" href="listaAlumnos">Alumnos</a>
                     <% } %>
                     <a class="dropdown-item" href="LogoutControlador">Cerrar sesión</a>
                 </div>

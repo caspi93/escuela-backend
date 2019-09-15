@@ -12,42 +12,51 @@
                     <div class="container">
                         <h1 id="titulo">Escuela de fútbol Talento Pivijayero</h1>
                         <div class="row justify-content-center">
-                            <form class="col-sm-10 col-md-6">
+                            <form class="col-sm-10 col-md-6" action="InscripcionControlador" method="post">
                                 <div class="form-group">
                                     <h3 class="subtitle">Datos del alumno</h3>
                                     <label for="nombres">Primer Nombre</label>
-                                    <input type="text" class="form-control" id="nombres" placeholder="Primer Nombre - Alumno">
+                                    <input type="text" name="primerNombre" class="form-control" id="nombres" placeholder="Primer Nombre - Alumno">
                                 </div>
                                 <div class="form-group">
                                     <label for="apellidos">Primer Apellido</label>
-                                    <input type="text" class="form-control" id="Apellidos" placeholder="Primer Apellido - Alumno">
+                                    <input type="text" name="primerApellido" class="form-control" id="Apellidos" placeholder="Primer Apellido - Alumno">
                                 </div>
                                 <h3 class="subtitle">Datos del acudiente</h3>
                                 <div class="form-group">
                                     <label for="nombres-acudiente">Primer Nombre</label>
-                                    <input type="text" class="form-control" id="nombres-acudiente" placeholder="Primer Nombre - Acudiente">
+                                    <input type="text" name="aPrimerNombre"class="form-control" id="nombres-acudiente" placeholder="Primer Nombre - Acudiente">
 
                                 </div>
                                 <div class="form-group">
                                     <label for="apellidos-acudiente">Primer Apellido</label>
-                                    <input type="text" class="form-control" id="nombres" placeholder="Primer Apellido- Acudiente">
+                                    <input type="text" name="aPrimerApellido" class="form-control" id="nombres" placeholder="Primer Apellido- Acudiente">
                                 </div>
                                 <div class="form-group">
                                     <label for="edad">Género</label>
-                                    <select name="select">
+                                    <select class="form-control" name="generos">
                                         <option value="">Selecione un género</option>
-                                        <option value="masculino">Masculino</option>
-                                        <option value="femenino">Femenino</option>
-                                        <option value="otro">Otro</option>
+                                        <option value="1">Masculino</option>
+                                        <option value="2">Femenino</option>
+                                        <option value="3">Otro</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="telefono">Telefono</label>
-                                    <input type="text" class="form-control" id="telefono" placeholder="Telefono">
+                                    <input type="text" name="celular" class="form-control" id="telefono" placeholder="Telefono">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Correo Electrónico</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Correo Electrónico">
+                                    <input type="email" name="correo" class="form-control" id="exampleInputEmail1" placeholder="Correo Electrónico">
+                                </div>
+                                <div class="form-group">
+                                    <label for="genero">Estado</label>
+                                    <select class="form-control" name="estado">
+                                        <option value="">Selecione un estado</option>
+                                        <option value="1">Matriculado</option>
+                                        <option value="2">Inscrito</option>
+                                        <option value="3">Suspendido</option>
+                                    </select>
                                 </div>
 
                                 <button type="submit" class="btn btn-primary">Guardar datos</button>
