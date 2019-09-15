@@ -22,6 +22,14 @@ public class TipoDocumento {
         this.nombre = null;
         this.nombreCorto = nombreCorto;
     }
+    /* 
+    * Método constructor que recibe como parámetro el nombre corto
+     */
+     public TipoDocumento(String nombreCorto) {
+        this.id = 0;
+        this.nombre = null;
+        this.nombreCorto = nombreCorto;
+    }
 
     /*
     * Método get del campo id

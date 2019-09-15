@@ -45,10 +45,10 @@ public class RegistroControlador extends HttpServlet {
         String nombreUsuario = request.getParameter("nombreUsuario");
         String clave = request.getParameter("clave");
         
-        System.out.println("hello man 6");
-        Genero genero = new Genero(generos);
+       
         Rol rol = new Rol(cargo);
         TipoDocumento tipoDocumento = new TipoDocumento(tipoDoc);
+        Genero genero = new Genero(generos);
         
         usuario.setPrimerNombre(primerNombre);
         usuario.setSegundoNombre(segundoNombre);

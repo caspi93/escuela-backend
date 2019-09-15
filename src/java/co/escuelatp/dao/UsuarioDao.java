@@ -16,6 +16,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -84,7 +85,7 @@ public class UsuarioDao {
 
                 r.setNombre(rolNombre);
 
-                consulta = "select p.*\n"
+                consulta = "select * from Permisos p\n"
                         + "inner join PermisosPorRoles pr\n"
                         + "on pr.idPermisos = p.id\n"
                         + "where pr.idRol = ?;";
@@ -116,5 +117,135 @@ public class UsuarioDao {
         }
 
         return u;
+    }
+    
+    public Usuario crearUsuario(Usuario usuario) {
+        System.out.println("hello man");
+        String consulta = "insert into Personas(PrimerNombre, SegundoNombre, PrimerApellido, SegundoApellido, TiposDeDocumentoId, NumeroDocumento, GeneroId)\n" +
+                           "values (?, ?, ?, ?, ?, ?, ?);";
+        PreparedStatement stmt = null;
+        try {
+            System.out.println("hello man 1");
+            stmt = connection.prepareStatement(consulta);
+            stmt.setString(1, usuario.getPrimerNombre());
+            stmt.setString(2, usuario.getSegundoNombre());
+            stmt.setString(3, usuario.getPrimerApellido());
+            stmt.setString(4, usuario.getSegundoApellido());
+            stmt.setInt(5, usuario.getTipoDocumento().getId());
+            stmt.setString(6, usuario.getNumeroDocumento());
+            stmt.setInt(7, usuario.getGenero().getId());
+            stmt.execute();
+            
+            PreparedStatement stment = connection.prepareStatement("SELECT Id AS LastID FROM Personas WHERE Id = @@Identity;");
+            stment.execute();
+            
+            ResultSet resultado = stment.getResultSet();
+
+            if (resultado.next()) {
+                System.out.println("hello man 2");
+                int personaId = resultado.getInt("LastID");
+                
+                PreparedStatement stement = connection.prepareStatement("insert into Usuarios (PersonaId, Correo, Celular, NombreUsuario, Clave, RolId)\n" +
+                        "values (?,?,?,?,?,?);");
+
+                stement.setInt(1, personaId);
+                stement.setString(2, usuario.getCorreo());
+                stement.setString(3, usuario.getCelular());
+                stement.setString(4, usuario.getNombreUsuario());
+                stement.setString(5, usuario.getClave());
+                stement.setInt(6, usuario.getRol().getId());
+                stement.execute();
+                
+                PreparedStatement stementt = connection.prepareStatement("SELECT Id AS LastID FROM Personas WHERE Id = @@Identity;");
+                stementt.execute();
+
+                ResultSet resultad = stementt.getResultSet();
+
+                if (resultad.next()) {
+                    int usuarioId = resultad.getInt("LastId");
+                    usuario.setId(usuarioId);
+                    usuario.setIdPersona(personaId);
+
+                    return usuario;
+                }
+            }
+
+        } catch (Exception ex) {
+            Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return usuario;
+    }
+    
+    public ArrayList<Usuario> getUsuarios() {
+        try {
+            PreparedStatement stmt = connection.prepareStatement("select *\n"
+                    + "from Usuarios u\n"
+                    + "inner join Personas p\n"
+                    + "on u.PersonaId = p.Id\n"
+                    + "inner join Roles r\n"
+                    + "on u.RolId = r.id\n"
+                    + "inner join TiposDeDocumento td\n"
+                    + "on p.TiposDeDocumentoId = td.id\n"
+                    + "inner join Generos g\n"
+                    + "on p.GeneroId = g.id;");
+            stmt.execute();
+
+            ResultSet resultado = stmt.getResultSet();
+            ArrayList<Usuario> usuarios = new ArrayList<>();
+
+            while (resultado.next()) {
+
+                int id = resultado.getInt("id");
+                int personaId = resultado.getInt("PersonaId");
+                String primerNombre = resultado.getString("PrimerNombre");
+                String segundoNombre = resultado.getString("SegundoNombre");
+                String primerApellido = resultado.getString("PrimerApellido");
+                String segundoApellido = resultado.getString("SegundoApellido");
+                int tipoDocumentoId = resultado.getInt("tiposDeDocumentoId");
+                String numeroDocumento = resultado.getString("NumeroDocumento");
+                String nombreCorto = resultado.getString("nombreCorto");
+                int generoId = resultado.getInt("GeneroId");
+                String nombre = resultado.getString(18);
+                int rolId = resultado.getInt("RolId");
+                String nombreRol = resultado.getString(15);
+                String nombreUsuario = resultado.getString("nombreUsuario");
+                String clave = resultado.getString("Clave");
+                String direccion = resultado.getString("direccion");
+                String correo = resultado.getString("Correo");
+                String celular = resultado.getString("Celular");
+
+                Usuario usuario = new Usuario();
+
+                usuario.setId(id);
+                usuario.setIdPersona(personaId);
+                usuario.setPrimerNombre(primerNombre);
+                usuario.setSegundoNombre(segundoNombre);
+                usuario.setPrimerApellido(primerApellido);
+                usuario.setSegundoApellido(segundoApellido);
+                usuario.setTipoDocumento(new TipoDocumento(tipoDocumentoId, nombreCorto));
+                usuario.setNumeroDocumento(numeroDocumento);
+                usuario.setGenero(new Genero(generoId, nombre));
+                usuario.setRol(new Rol(rolId, nombreRol));
+                usuario.setDireccion(direccion);
+                usuario.setCorreo(correo);
+                usuario.setNombreUsuario(nombreUsuario);
+                usuario.setClave(clave);
+                usuario.setCelular(celular);
+                usuarios.add(usuario);
+            }
+            return usuarios;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 }

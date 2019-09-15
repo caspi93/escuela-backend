@@ -29,7 +29,8 @@ public class DriverDB {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         
         } catch (Exception ex) {
-            Logger.getLogger(co.escuelatp.database.DriverDB.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(co.escuelatp.database.DriverDB.class.getName()).log(Level.SEVERE, "Falló en encontrar el driver", ex);
+            System.exit(1);
         }
     }
     

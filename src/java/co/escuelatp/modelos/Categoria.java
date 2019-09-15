@@ -15,6 +15,13 @@ public class Categoria {
         this.anoInicial = 0;
         this.anoFinal = 0;
     }
+    
+    public Categoria() {
+        this.id = 0;
+        this.nombre = null;
+        this.anoInicial = 0;
+        this.anoFinal = 0;
+    }
 
     /*
     ¨* Método get del campo Id

@@ -7,17 +7,21 @@ public class Acudiente {
     private int id;
     private String correo;
     private String celular;
-
-    // @ManyToOne
-    // @JoinColumn(name = "persona_id")
-    // private Persona persona;
+    private Persona persona;
 
     /*
      * Método constructor que recibe como parámetro la id
      */
     public Acudiente(int id) {
-       // this.persona = null;
+        this.persona = null;
         this.id = id;
+        this.correo = null;
+        this.celular = null;
+    }
+    
+      public Acudiente() {
+        this.persona = null;
+        this.id = 0;
         this.correo = null;
         this.celular = null;
     }
@@ -27,6 +31,13 @@ public class Acudiente {
      */
     public int getId() {
         return id;
+    }
+    
+     /*
+    *Método set del campo id
+     */
+    public void setId(int id) {
+        this.id = id;
     }
 
     /*
@@ -56,4 +67,14 @@ public class Acudiente {
     public void setCelular(String celular) {
         this.celular = celular;
     }
+
+    public Persona getPersona() {
+        return persona;
+    }
+
+    public void setPersona(Persona persona) {
+        this.persona = persona;
+    }
+    
+    
 }

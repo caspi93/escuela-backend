@@ -1,15 +1,22 @@
 package co.escuelatp.modelos;
 
+import java.util.Date;
+
 public class Alumno {
     // Atributos
    
     private int id;
     private float peso;
-    private int altura;
+    private float altura;
     private Talla talla;
     private String direccion;
     private Persona persona;
     private Categoria categoria;
+    private Date fechaNacimiento;
+    private Date fechaInscripcion;
+    private Date fechaMatricula;
+    private EstadoAlumno estadoAlumno;
+    private Acudiente acudiente;
 
     /*
      * Método constructor que recibe como parámetro la id
@@ -22,6 +29,26 @@ public class Alumno {
         this.talla = null;
         this.direccion = null;
         this.categoria = null;
+        this.fechaNacimiento = null;
+        this.fechaInscripcion = null;
+        this.fechaMatricula = null;
+        this.estadoAlumno = null;
+        this.acudiente = null;
+    }
+    
+      public Alumno() {
+        this.persona = null;
+        this.id = 0;
+        this.peso = 0;
+        this.altura = 0;
+        this.talla = null;
+        this.direccion = null;
+        this.categoria = null;
+        this.fechaNacimiento = null;
+        this.fechaInscripcion = null;
+        this.fechaMatricula = null;
+        this.estadoAlumno = null;
+        this.acudiente = null;
     }
 
     /*
@@ -29,6 +56,13 @@ public class Alumno {
      */
     public int getId() {
         return id;
+    }
+    
+     /*
+    *Método set del campo id
+     */
+    public void setId(int id) {
+        this.id = id;
     }
 
     /*
@@ -48,14 +82,14 @@ public class Alumno {
     /*
     * Método get del campo altura
      */
-    public int getAltura() {
+    public float getAltura() {
         return altura;
     }
 
     /*
     * Método set del campo altura
      */
-    public void setAltura(int altura) {
+    public void setAltura(float altura) {
         this.altura = altura;
     }
 
@@ -119,4 +153,53 @@ public class Alumno {
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
+
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public Date getFechaInscripcion() {
+        return fechaInscripcion;
+    }
+
+    public void setFechaInscripcion(Date fechaInscripcion) {
+        this.fechaInscripcion = fechaInscripcion;
+    }
+
+    public Date getFechaMatricula() {
+        return fechaMatricula;
+    }
+
+    public void setFechaMatricula(Date fechaMatricula) {
+        this.fechaMatricula = fechaMatricula;
+    }
+
+    public EstadoAlumno getEstadoAlumno() {
+        return estadoAlumno;
+    }
+
+    public void setEstadoAlumno(EstadoAlumno estadoAlumno) {
+        this.estadoAlumno = estadoAlumno;
+    }
+
+    public Acudiente getAcudiente() {
+        return acudiente;
+    }
+
+    public void setAcudiente(Acudiente acudiente) {
+        this.acudiente = acudiente;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
