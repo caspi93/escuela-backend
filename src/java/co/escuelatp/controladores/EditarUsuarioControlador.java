@@ -7,6 +7,7 @@ package co.escuelatp.controladores;
 
 import co.escuelatp.dao.UsuarioDao;
 import co.escuelatp.modelos.Genero;
+import co.escuelatp.modelos.Persona;
 import co.escuelatp.modelos.Rol;
 import co.escuelatp.modelos.TipoDocumento;
 import co.escuelatp.modelos.Usuario;
@@ -23,65 +24,82 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Luisk
  */
-@WebServlet(name = "RegistroControlador", urlPatterns = {"/RegistroControlador"})
-public class RegistroControlador extends HttpServlet {
+@WebServlet(name = "EditarUsuarioControlador", urlPatterns = {"/EditarUsuario"})
+public class EditarUsuarioControlador extends HttpServlet {
 
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         if ((Usuario) request.getSession().getAttribute("USUARIO") == null) {
             response.sendRedirect("login.jsp");
         } else {
-            request.setAttribute("url", "RegistroControlador");
-
+            System.out.println("hello man");
+            request.setAttribute("url", "EditarUsuario");
+            int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
+            UsuarioDao usuarioDao = new UsuarioDao();
+            Usuario u = usuarioDao.getUsuario(idUsuario);
+            request.setAttribute("USUARIO_SELECCIONADO", u);
+            
             RequestDispatcher dispatcher = request.getRequestDispatcher("registro.jsp");
             dispatcher.forward(request, response);
+            System.out.println("hello man");
         }
     }
-
+        
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         if ((Usuario) request.getSession().getAttribute("USUARIO") == null) {
             response.sendRedirect("login.jsp");
         } else {
-            Usuario usuario = new Usuario();
 
+            System.out.println("quiero entrar");
+            int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
+            int idPersona = Integer.parseInt(request.getParameter("idPersona"));
             String primerNombre = request.getParameter("primerNombre");
             String segundoNombre = request.getParameter("segundoNombre");
             String primerApellido = request.getParameter("primerApellido");
             String segundoApellido = request.getParameter("segundoApellido");
+            int tipoDoc = Integer.parseInt(request.getParameter("tipoDoc"));
+            String numeroDocumnto = request.getParameter("numDoc");
+            int genero = Integer.parseInt(request.getParameter("genero"));
             String celular = request.getParameter("celular");
             String correo = request.getParameter("correo");
-            int tipoDoc = Integer.parseInt(request.getParameter("tipoDoc"));
-            String numDoc = request.getParameter("numDoc");
             String direccion = request.getParameter("direccion");
             int cargo = Integer.parseInt(request.getParameter("cargo"));
-            int generos = Integer.parseInt(request.getParameter("genero"));
             String nombreUsuario = request.getParameter("nombreUsuario");
             String clave = request.getParameter("clave");
 
-            Rol rol = new Rol(cargo);
-            TipoDocumento tipoDocumento = new TipoDocumento(tipoDoc);
-            Genero genero = new Genero(generos);
-
+            System.out.println("estoy dentro");
+            Usuario usuario = new Usuario();
+            Genero g = new Genero();
+            Rol rol = new Rol();
+            TipoDocumento tipoDocumento = new TipoDocumento();
+            usuario.setIdPersona(idPersona);
+            usuario.setId(idUsuario);
             usuario.setPrimerNombre(primerNombre);
             usuario.setSegundoNombre(segundoNombre);
             usuario.setPrimerApellido(primerApellido);
             usuario.setSegundoApellido(segundoApellido);
-            usuario.setNumeroDocumento(numDoc);
-            usuario.setNombreUsuario(nombreUsuario);
-            usuario.setClave(clave);
-            usuario.setCorreo(correo);
+            tipoDocumento.setId(tipoDoc);
+            usuario.setTipoDocumento(tipoDocumento);
+            g.setId(genero);
+            usuario.setGenero(g);
+            rol.setId(cargo);
+            usuario.setRol(rol);
+            usuario.setNumeroDocumento(numeroDocumnto);
             usuario.setCelular(celular);
             usuario.setDireccion(direccion);
-            usuario.setRol(rol);
-            usuario.setGenero(genero);
-            usuario.setTipoDocumento(tipoDocumento);
+            usuario.setCorreo(correo);
+            usuario.setNombreUsuario(nombreUsuario);
+            usuario.setClave(clave);
 
+            System.out.println("voy llegando");
             UsuarioDao usuarioDao = new UsuarioDao();
-            usuarioDao.crearUsuario(usuario);
+            usuarioDao.editarUsuarios(usuario);
+
+            System.out.println("terminé");
 
             response.sendRedirect("listaUsuarios");
         }

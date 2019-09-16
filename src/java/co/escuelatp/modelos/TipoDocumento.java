@@ -14,6 +14,12 @@ public class TipoDocumento {
         this.nombre = null;
         this.nombreCorto = null;
     }
+    
+     public TipoDocumento() {
+        this.id = 0;
+        this.nombre = null;
+        this.nombreCorto = null;
+    }
     /*
     * Método constructor que recibe como parámetro la id y el nombre corto
      */
@@ -36,6 +42,13 @@ public class TipoDocumento {
      */
     public int getId() {
         return id;
+    }
+    
+    /*
+     * Método set del campo id
+     */
+    public void setId(int id) {
+        this.id = id;
     }
 
     /*

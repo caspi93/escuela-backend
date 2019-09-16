@@ -119,6 +119,13 @@ public class Usuario extends Persona {
     public void setId(int id) {
         this.id = id;
     }
+    
+     /*
+    * Método get del campo idPersona
+     */
+    public int getIdPersona() {
+        return idPersona;
+    }
 
     public boolean verificarPermiso(String codigo) {
         for (Permiso p : rol.getPermisos()) {

@@ -7,6 +7,7 @@ package co.escuelatp.controladores;
 
 import co.escuelatp.dao.AlumnoDao;
 import co.escuelatp.modelos.Alumno;
+import co.escuelatp.modelos.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -27,13 +28,16 @@ public class ListaAlumnosControlador extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        AlumnoDao alumnoDao = new AlumnoDao();
-        ArrayList<Alumno> alumnos = alumnoDao.getAlumnos();
-        request.setAttribute("Alumnos", alumnos);
-       
-        RequestDispatcher dispatcher = request.getRequestDispatcher("alumnos.jsp");
-        dispatcher.forward(request, response); 
-    }
+        if ((Usuario) request.getSession().getAttribute("USUARIO") == null) {
+            response.sendRedirect("login.jsp");
+        } else {
+            AlumnoDao alumnoDao = new AlumnoDao();
+            ArrayList<Alumno> alumnos = alumnoDao.getAlumnos();
+            request.setAttribute("Alumnos", alumnos);
 
+            RequestDispatcher dispatcher = request.getRequestDispatcher("alumnos.jsp");
+            dispatcher.forward(request, response);
+        }
+    }
 
 }

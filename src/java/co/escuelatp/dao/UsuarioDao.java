@@ -34,7 +34,6 @@ public class UsuarioDao {
     }
 
     public Usuario login(String nombreUsuario, String clave) {
-        System.out.println(nombreUsuario + " -- " + clave);
         Usuario u = null;
 
         String consulta = "select * from Usuarios u\n"
@@ -120,12 +119,10 @@ public class UsuarioDao {
     }
     
     public Usuario crearUsuario(Usuario usuario) {
-        System.out.println("hello man");
         String consulta = "insert into Personas(PrimerNombre, SegundoNombre, PrimerApellido, SegundoApellido, TiposDeDocumentoId, NumeroDocumento, GeneroId)\n" +
                            "values (?, ?, ?, ?, ?, ?, ?);";
         PreparedStatement stmt = null;
         try {
-            System.out.println("hello man 1");
             stmt = connection.prepareStatement(consulta);
             stmt.setString(1, usuario.getPrimerNombre());
             stmt.setString(2, usuario.getSegundoNombre());
@@ -142,7 +139,6 @@ public class UsuarioDao {
             ResultSet resultado = stment.getResultSet();
 
             if (resultado.next()) {
-                System.out.println("hello man 2");
                 int personaId = resultado.getInt("LastID");
                 
                 PreparedStatement stement = connection.prepareStatement("insert into Usuarios (PersonaId, Correo, Celular, NombreUsuario, Clave, RolId)\n" +
@@ -215,7 +211,7 @@ public class UsuarioDao {
                 int generoId = resultado.getInt("GeneroId");
                 String nombre = resultado.getString(18);
                 int rolId = resultado.getInt("RolId");
-                String nombreRol = resultado.getString(15);
+                String nombreRol = resultado.getString(18);
                 String nombreUsuario = resultado.getString("nombreUsuario");
                 String clave = resultado.getString("Clave");
                 String direccion = resultado.getString("direccion");
@@ -247,5 +243,106 @@ public class UsuarioDao {
             Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+    
+    public boolean editarUsuarios(Usuario usuario) {
+        System.out.println("estamos jodidos y medio");
+        try {
+            PreparedStatement stmt = connection.prepareStatement("update Personas set PrimerNombre = ?, PrimerApellido = ?, \n" +
+                "TiposDeDocumentoId = ?, NumeroDocumento = ?, Direccion = ?\n" +
+                "where Id = ?;");
+            System.out.println("estamos jodidos");
+            stmt.setString(1, usuario.getPrimerNombre());
+            stmt.setString(2, usuario.getPrimerApellido());
+            stmt.setInt(3, usuario.getTipoDocumento().getId());
+            stmt.setString(4, usuario.getNumeroDocumento());
+            stmt.setString(5, usuario.getDireccion());
+            stmt.setInt(6, usuario.getIdPersona());
+            System.out.println("la id es: " + usuario.getIdPersona());
+            stmt.executeUpdate();
+            
+            System.out.println("estamos un poco jodidos");
+            PreparedStatement stment = connection.prepareStatement("update Usuarios set Correo = ?, Celular = ?,\n" +
+                "NombreUsuario = ?, Clave = ?,\n" +
+                "RolId = ? where id = ?;");
+
+            System.out.println("estamos un poquito jodidos");
+            stment.setString(1, usuario.getCorreo());
+            stment.setString(2, usuario.getCelular());
+            stment.setString(3, usuario.getNombreUsuario());
+            stment.setString(4, usuario.getClave());
+            stment.setInt(5, usuario.getRol().getId()); 
+            stment.setInt(6, usuario.getId());
+            stment.executeUpdate();
+            System.out.println("vamos mejorando");
+            
+            return true;
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    
+    public Usuario getUsuario(int idUsuario) {
+        
+        Usuario u = null;
+
+        String consulta = "select * from Usuarios u\n"
+                + "inner join Personas p\n"
+                + "on u.PersonaId = p.Id\n"
+                + "where u.id = ?;";
+        PreparedStatement statement = null;
+
+        try {
+
+            statement = connection.prepareStatement(consulta);
+            statement.setInt(1, idUsuario);
+
+            ResultSet result = statement.executeQuery();
+
+            if (result.next()) {
+                int idPersona = result.getInt("PersonaId");
+                String pimerNombre = result.getString("primerNombre");
+                String segundoNombre = result.getString("SegundoNombre");
+                String primerApellido = result.getString("PrimerApellido");
+                String segundoApellido = result.getString("SegundoApellido");
+                int tipoDeDocumentoId = result.getInt("TiposDeDocumentoId");
+                String numeroDocumento = result.getString("NumeroDocumento");
+                int generoId = result.getInt("GeneroId");
+                int rolId = result.getInt("RolId");
+                String correo = result.getString("Correo");
+                String celular = result.getString("Celular");
+                String nombreUsuario = result.getString("NombreUsuario");
+
+                u = new Usuario(idUsuario, idPersona);
+                Rol r = new Rol(rolId);
+
+                u.setPrimerNombre(pimerNombre);
+                u.setSegundoNombre(segundoNombre);
+                u.setPrimerApellido(primerApellido);
+                u.setSegundoApellido(segundoApellido);
+                u.setTipoDocumento(new TipoDocumento(tipoDeDocumentoId));
+                u.setNumeroDocumento(numeroDocumento);
+                u.setGenero(new Genero(generoId));
+                u.setRol(r);
+                u.setCorreo(correo);
+                u.setCelular(celular);
+                u.setNombreUsuario(nombreUsuario);
+            }
+
+        } catch (Exception ex) {
+            Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return u;
     }
 }

@@ -5,6 +5,7 @@
  */
 package co.escuelatp.controladores;
 
+import co.escuelatp.modelos.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -22,15 +23,18 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "LogoutControlador", urlPatterns = {"/LogoutControlador"})
 public class LogoutControlador extends HttpServlet {
 
-    
-    @Override
+        @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        HttpSession sesion = request.getSession();
-        
-        sesion.removeAttribute("USUARIO");
-        RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
-        dispatcher.forward(request, response);
+        if ((Usuario) request.getSession().getAttribute("USUARIO") == null) {
+            response.sendRedirect("login.jsp");
+        } else {
+
+            HttpSession sesion = request.getSession();
+
+            sesion.removeAttribute("USUARIO");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+            dispatcher.forward(request, response);
+        }
     }
 }

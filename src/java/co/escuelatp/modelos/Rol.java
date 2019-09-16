@@ -24,6 +24,12 @@ public class Rol {
         this.permisos = new ArrayList<>();
     }
     
+     public Rol() {
+        this.id = 0;
+        this.nombre = null;
+        this.permisos = new ArrayList<>();
+    }
+    
     /*
     * Método que asigna los permisos
     */
@@ -38,10 +44,17 @@ public class Rol {
         return permisos;
     }
     /*
-    ¨* Método get del campo rolId
+     * Método get del campo id
      */
     public int getId() {
         return id;
+    }
+    
+    /*
+     * Método get del campo id
+     */
+    public void setId(int id) {
+        this.id = id;
     }
 
     /*

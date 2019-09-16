@@ -20,12 +20,24 @@ public class Genero {
         this .id = id;
         this.nombre = nombre;
     }
+    
+     public  Genero() {
+        this .id = 0;
+        this.nombre = null;
+    }
 
     /*
      * Método get del campo id
      */
     public int getId() {
         return id;
+    }
+    
+    /*
+     * Método set del campo id
+     */
+    public void setId(int id) {
+        this.id = id;
     }
 
     /*
