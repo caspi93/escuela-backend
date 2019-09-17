@@ -251,8 +251,8 @@ public class AlumnoDao {
             stment.setString(5, alumno.getDireccion()); 
             java.sql.Date fecha = new java.sql.Date(alumno.getFechaNacimiento().getTime());
             stment.setDate(6, fecha);
-            stment.setInt(7, alumno.getId());
-            stmt.setInt(8, alumno.getEstadoAlumno().getId());
+            stment.setInt(7, alumno.getEstadoAlumno().getId());
+            stment.setInt(8, alumno.getId());
             stment.executeUpdate();
             System.out.println("vamos mejorando");
             
