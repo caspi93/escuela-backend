@@ -34,23 +34,27 @@
 
                         <tbody>
                             <% for (Usuario u : usuarios) {%>
-                            <tr>
-                                <td><%= u.getPrimerNombre() + " " + u.getPrimerApellido() %></td>
-                                <td><%= u.getTipoDocumento().getNombreCorto()%></td>
-                                <td><%= u.getNumeroDocumento()%></td>
-                                <td><%= u.getCelular()%></td>
-                                <td><%= u.getCorreo()%></td>
-                                <% if(u.getDireccion() == null) { %>
-                                    <td> Vacío </td>
-                                <% } else { %>
-                                <td><%= u.getDireccion()%></td>
-                                <% } %>
-                                <td><%= u.getRol().getNombre()%></td>
-                                <td><a class="btn btn-primary" href="EditarUsuario?idUsuario=<%= u.getId() %>" role="button">Editar</a>
-                                <a class="btn btn-danger" href="#" role="button">Eliminar</a></td>
+                                <% if (u.getId() != 1) { %>
+                                <tr>
+                                    <td><%= u.getPrimerNombre() + " " + u.getPrimerApellido() %></td>
+                                    <td><%= u.getTipoDocumento().getNombreCorto()%></td>
+                                    <td><%= u.getNumeroDocumento()%></td>
+                                    <td><%= u.getCelular()%></td>
+                                    <td><%= u.getCorreo()%></td>
+                                    <% if(u.getDireccion() == null) { %>
+                                        <td> Vacío </td>
+                                    <% } else { %>
+                                    <td><%= u.getDireccion()%></td>
+                                    <% } %>
+                                    <td><%= u.getRol().getNombre()%></td>
+                                    <td><a class="btn btn-primary" href="EditarUsuario?idUsuario=<%= u.getId() %>" role="button">Editar</a>
+                                        <% if (usuario.verificarPermiso("ELIMINAR_USUARIO")) { %>
+                                    <a class="btn btn-danger" href="EliminarUsuario?idUsuario=<%= u.getId() %>" role="button">Eliminar</a></td>
+                                    <% } %>
+
+                                </tr>
                                 <% }%>
-                                
-                            </tr>
+                            <% } %>
                         </tbody>
                     </table>
                 </div>

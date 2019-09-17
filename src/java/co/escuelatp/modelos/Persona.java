@@ -44,7 +44,7 @@ public class Persona {
     /*
     * Método get del campo id
      */
-    public int getIdPerona() {
+    public int getIdPersona() {
         return idPersona;
     }
     

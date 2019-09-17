@@ -89,7 +89,7 @@
                             </div>
                             <div class="form-group col-sm-10 col-md-6">
                                 <label for="apellidos">Contraseña</label>
-                                <input required type="text" name="clave" class="form-control" id="Clave" placeholder="Contraseña">
+                                <input required type="password" name="clave" class="form-control" id="Clave" placeholder="Contraseña">
                             </div>
                             <div class="form-group col-sm-12">
                                 <button type="submit" class="btn btn-primary">Guardar datos</button>

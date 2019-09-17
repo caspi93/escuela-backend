@@ -12,6 +12,7 @@ import co.escuelatp.modelos.Alumno;
 import co.escuelatp.modelos.Categoria;
 import co.escuelatp.modelos.EstadoAlumno;
 import co.escuelatp.modelos.Persona;
+import co.escuelatp.modelos.Talla;
 import co.escuelatp.modelos.TipoDocumento;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -150,7 +151,7 @@ public class AlumnoDao {
     public ArrayList<Alumno> getAlumnos() {
         try {
             PreparedStatement stmt = connection.prepareStatement("select a.id, p.PrimerNombre, p.PrimerApellido,\n" +
-                    "td.nombreCorto, p.NumeroDocumento, c.Nombre, a.FechaDeNacimiento, pp.PrimerNombre as APrimerNombre, pp.PrimerApellido as APrimerApellido, a.Direccion, ea.Nombre as Categoria\n" +
+                    "td.nombreCorto, p.NumeroDocumento, c.Nombre as Categoria, a.FechaDeNacimiento, pp.PrimerNombre as APrimerNombre, pp.PrimerApellido as APrimerApellido, a.Direccion, ea.Nombre as Estado, EstadoId\n" +
                     "from Alumnos a\n" +
                     "inner join Personas p\n" +
                     "on a.PersonaId = p.Id\n" +
@@ -175,19 +176,20 @@ public class AlumnoDao {
                 String primerApellido = resultado.getString("PrimerApellido");
                 String numeroDocumento = resultado.getString("NumeroDocumento");
                 String nombreCorto = resultado.getString("nombreCorto");
-                String categoria = resultado.getString("Nombre");
+                String categoria = resultado.getString("Categoria");
                 String fecNac = resultado.getString("FechaDeNacimiento");
                 String aPrimerNombre = resultado.getString("APrimerNombre");
                 String aPrimerApellido = resultado.getString("APrimerApellido");
                 String direccion = resultado.getString("direccion");
-                String estado = resultado.getString("Categoria");
+                String estado = resultado.getString("Estado");
+                int estadoId = resultado.getInt("EstadoId");
                 
                 Persona persona = new Persona();
                 Persona p = new Persona();
                 Alumno alumno = new Alumno();
                 Acudiente acudiente = new Acudiente();
                 Categoria c = new Categoria();
-                EstadoAlumno e = new EstadoAlumno();
+                EstadoAlumno e = new EstadoAlumno(estadoId);
                 
                 
                 alumno.setId(id);
@@ -214,8 +216,152 @@ public class AlumnoDao {
             }
             return alumnos;
         }catch (SQLException ex) {
-            Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AlumnoDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+    
+    public boolean editarAlumno(Alumno alumno ) {
+        System.out.println("estamos jodidos y medio");
+        try {
+            PreparedStatement stmt = connection.prepareStatement("update Personas set PrimerNombre = ?, SegundoNombre = ?, PrimerApellido = ?,\n" +
+                "SegundoApellido = ?, TiposDeDocumentoId = ?, NumeroDocumento = ?\n" +
+                "where Id = ?;");
+            System.out.println("estamos jodidos");
+            stmt.setString(1, alumno.getPersona().getPrimerNombre());
+            stmt.setString(2, alumno.getPersona().getSegundoNombre());
+            stmt.setString(3, alumno.getPersona().getPrimerApellido());
+            stmt.setString(4, alumno.getPersona().getSegundoApellido());
+            stmt.setInt(5, alumno.getPersona().getTipoDocumento().getId());
+            stmt.setString(6, alumno.getPersona().getNumeroDocumento());
+            stmt.setInt(7, alumno.getPersona().getIdPersona());
+            System.out.println("la id es: " + alumno.getPersona().getIdPersona());
+            stmt.executeUpdate();
+            
+            System.out.println("estamos un poco jodidos");
+            PreparedStatement stment = connection.prepareStatement("update Alumnos set Peso = ?, Altura = ?,\n" +
+                "TallaId = ?, CategoriaId = ?, Direccion = ?, FechaDeNacimiento = ?, EstadoId = ?\n" +
+                "where id = ?;");
+
+            System.out.println("estamos un poquito jodidos");
+            stment.setFloat(1, alumno.getPeso());
+            stment.setFloat(2, alumno.getAltura());
+            stment.setInt(3, alumno.getTalla().getId());
+            stment.setInt(4, alumno.getCategoria().getId());
+            stment.setString(5, alumno.getDireccion()); 
+            java.sql.Date fecha = new java.sql.Date(alumno.getFechaNacimiento().getTime());
+            stment.setDate(6, fecha);
+            stment.setInt(7, alumno.getId());
+            stmt.setInt(8, alumno.getEstadoAlumno().getId());
+            stment.executeUpdate();
+            System.out.println("vamos mejorando");
+            
+            return true;
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    
+    public Alumno getAlumno(int idAlumno) {
+        
+        Alumno a = null;
+
+        String consulta = "select * from Alumnos a\n"
+                + "inner join Personas p\n"
+                + "on a.PersonaId = p.Id\n"
+                + "left join Tallas t\n"
+                + "on a.TallaId = t.id\n"
+                + "left join Categorias c\n"
+                + "on a.CategoriaId = c.id\n"
+                + "where a.id = ?;";
+        PreparedStatement statement = null;
+
+        try {
+
+            statement = connection.prepareStatement(consulta);
+            statement.setInt(1, idAlumno);
+
+            ResultSet result = statement.executeQuery();
+
+            if (result.next()) {
+                int idPersona = result.getInt("PersonaId");
+                int idAcudiente = result.getInt("AcudienteId");
+                String pimerNombre = result.getString("primerNombre");
+                String segundoNombre = result.getString("SegundoNombre");
+                String primerApellido = result.getString("PrimerApellido");
+                String segundoApellido = result.getString("SegundoApellido");
+                int tipoDeDocumentoId = result.getInt("TiposDeDocumentoId");
+                String numeroDocumento = result.getString("NumeroDocumento");
+                int tallaId = result.getInt("TallaId");
+                int categoriaId = result.getInt("CategoriaId");
+                String direccion = result.getString("Direccion");
+                float peso = result.getFloat("Peso");
+                float altura = result.getFloat("Altura");
+
+
+                a = new Alumno(idAlumno);
+                Talla talla = new Talla(tallaId);
+                Categoria categoria = new Categoria(categoriaId);
+                Persona p = new Persona(idPersona);
+                Acudiente ac = new Acudiente(idAcudiente);
+
+                p.setPrimerNombre(pimerNombre);
+                p.setSegundoNombre(segundoNombre);
+                p.setPrimerApellido(primerApellido);
+                p.setSegundoApellido(segundoApellido);
+                p.setTipoDocumento(new TipoDocumento(tipoDeDocumentoId));
+                p.setNumeroDocumento(numeroDocumento);
+                a.setCategoria(new Categoria(categoriaId));
+                a.setTalla(new Talla(tallaId));
+                a.setDireccion(direccion);
+                a.setPeso(peso);
+                a.setAltura(altura);
+                a.setPersona(p);
+                a.setCategoria(categoria);
+                a.setTalla(talla);
+                a.setAcudiente(ac);
+            }
+
+        } catch (Exception ex) {
+            Logger.getLogger(AlumnoDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AlumnoDao.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return a;
+    }
+    
+        public boolean eliminarAlumno(Alumno a) {
+
+        String consulta = "delete from Alumnos where id = ?;";
+        PreparedStatement statement = null;
+
+        try {
+            statement = connection.prepareStatement(consulta);
+            statement.setInt(1, a.getId());
+            
+            statement.execute();
+                      
+            return true;
+        } catch (Exception ex) {
+            Logger.getLogger(AlumnoDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AlumnoDao.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return false;
     }
 }

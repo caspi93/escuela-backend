@@ -10,6 +10,7 @@
                 <div class="horario-practica" class="col-sm-9 col-md-12">
                     <h3>Lista de Alumnos</h3>
                     <%@page import="co.escuelatp.modelos.Alumno, java.util.ArrayList" %>
+                    <%@page import="co.escuelatp.modelos.Acudiente" %>
                     <% ArrayList<Alumno> alumnos = (ArrayList<Alumno>) request.getAttribute("Alumnos");%>
                     <div class="form-group col-sm-12">
                         <% if (usuario.verificarPermiso("MATRICULAR_ALUMNO")) { %>
@@ -43,8 +44,13 @@
                                 <td><%= a.getDireccion() %></td>
                                 <td><%= a.getEstadoAlumno().getCodigo()%></td>
         
-                                <td><a class="btn btn-primary" href="#" role="button">Editar</a>
-                                <a class="btn btn-danger" href="#" role="button">Eliminar</a></td>
+                                <td><a class="btn btn-primary btn-sm"  href="EditarAlumno?idAlumno=<%= a.getId() %>" role="button">Editar</a>
+                                    <% if (usuario.verificarPermiso("ELIMINAR_ALUMNO")) { %>
+                                <a class="btn btn-danger btn-sm" href="EliminarAlumno?idAlumno=<%= a.getId() %>" role="button">Eliminar</a>
+                                <% } %>
+                                <% if(a.getEstadoAlumno().getId() == 2) { %>
+                                <a class="btn btn-primary btn-sm" href="MatricularAlumno?idAlumno=<%= a.getId() %>" role="button">Matricular</a></td>
+                                <% } %>
                             <% } %>
                             </tr>
                         </tbody>
