@@ -14,11 +14,11 @@
                     <div class="container">
                         <h1 id="titulo">Escuela de fútbol Talento Pivijayero</h1>
                         
-                            <form class="row" method="post" action="<%= request.getAttribute("url")%>">
+                        <form class="row" method="post" action="<%= request.getAttribute("url")%>">
                                 <% Alumno seleccionAlumno = (Alumno) request.getAttribute("ALUMNO_SELECCIONADO"); %>
                                 <% Acudiente seleccionAcudiente = (Acudiente) request.getAttribute("ACUDIENTE_SELECCIONADO"); %>
                             
-                                    <% if (seleccionAlumno != null) { %>
+                                    <% if (seleccionAlumno != null && seleccionAcudiente != null) { %>
                                         <input type="hidden" name="idAlumno" value="<%= seleccionAlumno.getId() %>" class="form-control" id="pnombre" placeholder="">
                                         <input type="hidden" name="idPersona" value="<%= seleccionAlumno.getPersona().getIdPersona() %>" class="form-control" id="pnombre" placeholder="">
                                         <input type="hidden" name="idAcudiente" value="<%= seleccionAcudiente.getId() %>" class="form-control" id="pnombre" placeholder="">

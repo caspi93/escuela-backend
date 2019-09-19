@@ -33,9 +33,6 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "MatricularAlumnoControlador", urlPatterns = {"/MatricularAlumno"})
 public class MatricularAlumnoControlador extends HttpServlet {
-
-   
-
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -43,7 +40,6 @@ public class MatricularAlumnoControlador extends HttpServlet {
         if ((Usuario) request.getSession().getAttribute("USUARIO") == null) {
             response.sendRedirect("login.jsp");
         } else {
-            System.out.println("hello man");
             request.setAttribute("url", "MatricularAlumno");
             int idAlumno = Integer.parseInt(request.getParameter("idAlumno"));
             AlumnoDao alumnoDao = new AlumnoDao();
@@ -57,7 +53,6 @@ public class MatricularAlumnoControlador extends HttpServlet {
             
             RequestDispatcher dispatcher = request.getRequestDispatcher("matriculas.jsp");
             dispatcher.forward(request, response);
-            System.out.println("hello man");
         }
         
     }
@@ -71,7 +66,6 @@ public class MatricularAlumnoControlador extends HttpServlet {
         } else {
 
             //Alumno
-            System.out.println("quiero entrar");
             int idAlumno = Integer.parseInt(request.getParameter("idAlumno"));
             int idPersona = Integer.parseInt(request.getParameter("idPersona"));
             String primerNombre = request.getParameter("primerNombre");
@@ -102,7 +96,6 @@ public class MatricularAlumnoControlador extends HttpServlet {
             String celular = request.getParameter("celular");
             
             
-            System.out.println("estoy dentro");
             Alumno alumno = new Alumno();
             Persona persona = new Persona();
             Persona p = new Persona(idPersonaA);
@@ -148,12 +141,10 @@ public class MatricularAlumnoControlador extends HttpServlet {
             acudiente.setId(idAcudiente);
             
 
-            System.out.println("voy llegando");
             AlumnoDao usuarioDao = new AlumnoDao();
             usuarioDao.editarAlumno(alumno);
             AcudienteDao acudienteDao = new AcudienteDao();
             acudienteDao.editarAcudiente(acudiente);
-            System.out.println("terminé");
 
             response.sendRedirect("listaAlumnos");
         }

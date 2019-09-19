@@ -53,9 +53,9 @@
                                     <label for="genero">Estado</label>
                                     <select class="form-control" name="estado">
                                         <option value="">Selecione un estado</option>
-                                        <option value="1">Matriculado</option>
-                                        <option value="2">Inscrito</option>
-                                        <option value="3">Suspendido</option>
+                                        <option value="1">Matricular</option>
+                                        <option value="2">Inscribir</option>
+                                        <option value="3">Suspender</option>
                                     </select>
                                 </div>
 

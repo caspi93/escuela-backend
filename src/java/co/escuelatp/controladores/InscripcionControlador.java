@@ -62,6 +62,7 @@ public class InscripcionControlador extends HttpServlet {
         persona.setPrimerApellido(primerApellido);
         alumno.setEstadoAlumno(estadoAlumno);
         alumno.setPersona(persona);
+        alumno.setAcudiente(acudiente);
         
         p.setPrimerNombre(aPrimerNombre);
         p.setPrimerApellido(aPrimerApellido);
@@ -70,10 +71,11 @@ public class InscripcionControlador extends HttpServlet {
         acudiente.setCelular(celular);
         acudiente.setPersona(p);
         
-        AlumnoDao alumnoDao = new AlumnoDao();
-        alumnoDao.inscribirAlumno(alumno);
         AcudienteDao acudienteDao = new AcudienteDao();
         acudienteDao.inscribirAcudiente(acudiente);
+        AlumnoDao alumnoDao = new AlumnoDao();
+        alumnoDao.inscribirAlumno(alumno);
+
         
         RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
         dispatcher.forward(request, response);

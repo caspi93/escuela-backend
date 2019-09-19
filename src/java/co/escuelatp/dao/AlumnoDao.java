@@ -56,8 +56,8 @@ public class AlumnoDao {
             if (resultado.next()) {
                 int personaId = resultado.getInt("LastID");
 
-                PreparedStatement stement = connection.prepareStatement("insert into Alumnos (Peso, Altura, Direccion, FechaDeNacimiento, FechaDeMatricula, PersonaId, CategoriaId, TallaId, EstadoId)\n"
-                        + "values (?,?,?,?, current_timestamp,?, ?, ?, ?);");
+                PreparedStatement stement = connection.prepareStatement("insert into Alumnos (Peso, Altura, Direccion, FechaDeNacimiento, FechaDeMatricula, PersonaId, CategoriaId, TallaId, EstadoId, AcudienteId)\n"
+                        + "values (?,?,?,?, current_timestamp,?, ?, ?, ?, ?);");
                
                 stement.setFloat(1, alumno.getPeso());
                 stement.setFloat(2, alumno.getAltura());
@@ -68,6 +68,7 @@ public class AlumnoDao {
                 stement.setInt(6, alumno.getCategoria().getId());
                 stement.setInt(7, alumno.getTalla().getId());
                 stement.setInt(8, alumno.getEstadoAlumno().getId());
+                stement.setInt(9, alumno.getAcudiente().getId());
                 stement.execute();
                 
                 PreparedStatement stementt = connection.prepareStatement("SELECT Id AS LastID FROM Personas WHERE Id = @@Identity;");
@@ -114,11 +115,12 @@ public class AlumnoDao {
             if (resultado.next()) {
                 int personaId = resultado.getInt("LastID");
 
-                PreparedStatement stement = connection.prepareStatement("insert into Alumnos (FechaDeInscripcion, PersonaId, EstadoId)\n"
-                        + "values (current_timestamp, ?, ?);");
+                PreparedStatement stement = connection.prepareStatement("insert into Alumnos (FechaDeInscripcion, PersonaId, EstadoId, AcudienteId)\n"
+                        + "values (current_timestamp, ?, ?, ?);");
                
                 stement.setInt(1, personaId);
                 stement.setInt(2, alumno.getEstadoAlumno().getId());
+                stement.setInt(3, alumno.getAcudiente().getId());
                 stement.execute();
                 
                 PreparedStatement stementt = connection.prepareStatement("SELECT Id AS LastID FROM Personas WHERE Id = @@Identity;");
@@ -227,7 +229,6 @@ public class AlumnoDao {
             PreparedStatement stmt = connection.prepareStatement("update Personas set PrimerNombre = ?, SegundoNombre = ?, PrimerApellido = ?,\n" +
                 "SegundoApellido = ?, TiposDeDocumentoId = ?, NumeroDocumento = ?\n" +
                 "where Id = ?;");
-            System.out.println("estamos jodidos");
             stmt.setString(1, alumno.getPersona().getPrimerNombre());
             stmt.setString(2, alumno.getPersona().getSegundoNombre());
             stmt.setString(3, alumno.getPersona().getPrimerApellido());
@@ -235,15 +236,12 @@ public class AlumnoDao {
             stmt.setInt(5, alumno.getPersona().getTipoDocumento().getId());
             stmt.setString(6, alumno.getPersona().getNumeroDocumento());
             stmt.setInt(7, alumno.getPersona().getIdPersona());
-            System.out.println("la id es: " + alumno.getPersona().getIdPersona());
             stmt.executeUpdate();
             
-            System.out.println("estamos un poco jodidos");
             PreparedStatement stment = connection.prepareStatement("update Alumnos set Peso = ?, Altura = ?,\n" +
                 "TallaId = ?, CategoriaId = ?, Direccion = ?, FechaDeNacimiento = ?, EstadoId = ?\n" +
                 "where id = ?;");
 
-            System.out.println("estamos un poquito jodidos");
             stment.setFloat(1, alumno.getPeso());
             stment.setFloat(2, alumno.getAltura());
             stment.setInt(3, alumno.getTalla().getId());
@@ -254,11 +252,9 @@ public class AlumnoDao {
             stment.setInt(7, alumno.getEstadoAlumno().getId());
             stment.setInt(8, alumno.getId());
             stment.executeUpdate();
-            System.out.println("vamos mejorando");
             
             return true;
-            
-            
+               
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
         }

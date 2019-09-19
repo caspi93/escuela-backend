@@ -40,7 +40,6 @@ public class EditarAlumnoControlador extends HttpServlet {
         if ((Usuario) request.getSession().getAttribute("USUARIO") == null) {
             response.sendRedirect("login.jsp");
         } else {
-            System.out.println("hello man");
             request.setAttribute("url", "EditarAlumno");
             int idAlumno = Integer.parseInt(request.getParameter("idAlumno"));
             AlumnoDao alumnoDao = new AlumnoDao();
@@ -54,7 +53,6 @@ public class EditarAlumnoControlador extends HttpServlet {
             
             RequestDispatcher dispatcher = request.getRequestDispatcher("matriculas.jsp");
             dispatcher.forward(request, response);
-            System.out.println("hello man");
         }
         
     }
@@ -67,7 +65,6 @@ public class EditarAlumnoControlador extends HttpServlet {
         } else {
 
             //Alumno
-            System.out.println("quiero entrar");
             int idAlumno = Integer.parseInt(request.getParameter("idAlumno"));
             int idPersona = Integer.parseInt(request.getParameter("idPersona"));
             String primerNombre = request.getParameter("primerNombre");
@@ -97,7 +94,6 @@ public class EditarAlumnoControlador extends HttpServlet {
             String celular = request.getParameter("celular");
             
             
-            System.out.println("estoy dentro");
             Alumno alumno = new Alumno();
             Persona persona = new Persona();
             Persona p = new Persona(idPersonaA);
@@ -140,12 +136,10 @@ public class EditarAlumnoControlador extends HttpServlet {
             acudiente.setId(idAcudiente);
             
 
-            System.out.println("voy llegando");
             AlumnoDao usuarioDao = new AlumnoDao();
             usuarioDao.editarAlumno(alumno);
             AcudienteDao acudienteDao = new AcudienteDao();
             acudienteDao.editarAcudiente(acudiente);
-            System.out.println("terminé");
 
             response.sendRedirect("listaAlumnos");
         }

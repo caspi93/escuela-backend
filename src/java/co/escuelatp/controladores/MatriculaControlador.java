@@ -34,6 +34,22 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "MatriculaControlador", urlPatterns = {"/MatriculaControlador"})
 public class MatriculaControlador extends HttpServlet {
 
+    
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        if ((Usuario) request.getSession().getAttribute("USUARIO") == null) {
+            response.sendRedirect("login.jsp");
+        } else {
+            request.setAttribute("url", "MatriculaControlador");
+            
+            RequestDispatcher dispatcher = request.getRequestDispatcher("matriculas.jsp");
+            dispatcher.forward(request, response);
+        }
+        
+    }
+
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -105,14 +121,14 @@ public class MatriculaControlador extends HttpServlet {
             acudiente.setCorreo(correo);
             acudiente.setCelular(celular);
             acudiente.setPersona(p);
+            alumno.setAcudiente(acudiente);
 
-            AlumnoDao alumnoDao = new AlumnoDao();
-            alumnoDao.matricularAlumno(alumno);
             AcudienteDao acudienteDao = new AcudienteDao();
             acudienteDao.crearAcudiente(acudiente);
+            AlumnoDao alumnoDao = new AlumnoDao();
+            alumnoDao.matricularAlumno(alumno);
 
-            RequestDispatcher dispatcher = request.getRequestDispatcher("alumnos.jsp");
-            dispatcher.forward(request, response);
+            response.sendRedirect("listaAlumnos");
         }
     }
 

@@ -144,12 +144,10 @@ public class AcudienteDao {
     }
     
     public boolean editarAcudiente(Acudiente acudiente ) {
-        System.out.println("estamos jodidos y medio");
         try {
             PreparedStatement stmt = connection.prepareStatement("update Personas set PrimerNombre = ?, SegundoNombre = ?, PrimerApellido = ?, \n" +
                 "SegundoApellido = ?, GeneroId = ?, TiposDeDocumentoId = ?, NumeroDocumento = ?\n" +
                 "where Id = ?;");
-            System.out.println("estamos jodidos");
             stmt.setString(1, acudiente.getPersona().getPrimerNombre());
             stmt.setString(2, acudiente.getPersona().getSegundoNombre());
             stmt.setString(3, acudiente.getPersona().getPrimerApellido());
@@ -161,20 +159,15 @@ public class AcudienteDao {
             System.out.println("la id es: " + acudiente.getPersona().getIdPersona());
             stmt.executeUpdate();
             
-            System.out.println("estamos un poco jodidos");
             PreparedStatement stment = connection.prepareStatement("update Acudientes set Correo = ?, Celular = ?\n" +
                 "where id = ?;");
-
-            System.out.println("estamos un poquito jodidos");
             stment.setString(1, acudiente.getCorreo());
             stment.setString(2, acudiente.getCelular());
             stment.setInt(3, acudiente.getId());
             stment.executeUpdate();
-            System.out.println("vamos mejorando");
-            
+ 
             return true;
-            
-            
+             
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -182,7 +175,6 @@ public class AcudienteDao {
     }
     
     public Acudiente getAcudiente(int idAcudiente) {
-        
         Acudiente ac = null;
 
         String consulta = "select * from Acudientes ac\n"
@@ -190,7 +182,7 @@ public class AcudienteDao {
                 + "on ac.PersonaId = p.Id\n"
                 + "inner join Generos g\n"
                 + "on p.GeneroId = g.id\n"
-                + "inner join TiposDeDocumento td\n"
+                + "left join TiposDeDocumento td\n"
                 + "on p.TiposDeDocumentoId = td.id\n"
                 + "where ac.id = ?;";
         PreparedStatement statement = null;
