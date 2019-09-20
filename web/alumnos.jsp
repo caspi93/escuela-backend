@@ -49,7 +49,7 @@
                                 <% if (a.getCategoria().getNombre() == null) { %>
                                 <td> Vacío </td>
                                 <% } else {%>
-                                <td><%= a.getCategoria().getNombre() == null%></td>
+                                <td><%= a.getCategoria().getNombre() %></td>
                                 <% } %>
                                 <% if (a.getFechaNacimiento() == null) { %>
                                 <td> Vacío </td>

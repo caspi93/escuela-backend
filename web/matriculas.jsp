@@ -46,10 +46,10 @@
                                     <select class="form-control" name="tipoDoc" required>
                                         <option value="">Selecione un tipo de documento</option>
                                         <option value="1">Cédula de Ciudadanía</option>
-                                        <option value="2">Tarjeta de Identidad</option>
-                                        <option value="3">Pasaporte</option>
-                                        <option value="4">Cédula de Extranjería</option>
-                                        <option value="5">Registro Civil</option>
+                                        <option value="3">Tarjeta de Identidad</option>
+                                        <option value="5">Pasaporte</option>
+                                        <option value="2">Cédula de Extranjería</option>
+                                        <option value="4">Registro Civil</option>
                                     </select>
                                 </div>
                                 <div class="form-group col-sm-10 col-md-6">
@@ -141,15 +141,6 @@
                                 <div class="form-group col-sm-10 col-md-6">
                                     <label for="exampleInputEmail1">Correo Electrónico</label>
                                     <input type="email" name="correo" class="form-control" id="exampleInputEmail1" placeholder="Correo Electrónico" value="<%= seleccionAlumno != null ? seleccionAcudiente.getCorreo() : "" %>" required>
-                                </div>
-                                <div class="form-group col-sm-10 col-md-6">
-                                    <label for="genero">Estado</label>
-                                    <select class="form-control" name="estado">
-                                        <option value="">Selecione un estado</option>
-                                        <option value="1">Matriculado</option>
-                                        <option value="2">Inscrito</option>
-                                        <option value="3">Suspendido</option>
-                                    </select>
                                 </div>
                                 <div class="form-group col-sm-12">
                                      <button type="submit" class="btn btn-primary">Guardar datos</button>

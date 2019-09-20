@@ -140,6 +140,8 @@ public class Persona {
         this.tipoDocumento = tipoDocumento;
     }
     
+    
+    
     /*
      * Método get del campo numeroDocumento
      */

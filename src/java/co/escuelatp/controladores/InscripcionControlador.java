@@ -43,7 +43,6 @@ public class InscripcionControlador extends HttpServlet {
         
         String primerNombre = request.getParameter("primerNombre");
         String primerApellido = request.getParameter("primerApellido");
-        int estado = Integer.parseInt(request.getParameter("estado"));
         
         String aPrimerNombre = request.getParameter("aPrimerNombre");
         String aPrimerApellido = request.getParameter("aPrimerApellido");
@@ -56,7 +55,7 @@ public class InscripcionControlador extends HttpServlet {
         Persona p = new Persona();
         alumno.setPersona(persona);
         Acudiente acudiente = new Acudiente();
-        EstadoAlumno estadoAlumno = new EstadoAlumno(estado);
+        EstadoAlumno estadoAlumno = new EstadoAlumno(2);
         
         persona.setPrimerNombre(primerNombre);
         persona.setPrimerApellido(primerApellido);

@@ -80,7 +80,6 @@ public class MatricularAlumnoControlador extends HttpServlet {
             int tallaId = Integer.parseInt(request.getParameter("talla"));
             int categoriaId = Integer.parseInt(request.getParameter("categoria"));
             String fecNac = request.getParameter("fecNac");
-            int estadoId = Integer.parseInt(request.getParameter("estado"));
             
             //Acudiente
             String aPrimerNombre = request.getParameter("aPrimerNombre");
@@ -105,7 +104,7 @@ public class MatricularAlumnoControlador extends HttpServlet {
             TipoDocumento td = new TipoDocumento(tipoDocAc);
             Acudiente acudiente = new Acudiente();
             Genero genero = new Genero(generoId);
-            EstadoAlumno ea = new EstadoAlumno(estadoId);
+            EstadoAlumno ea = new EstadoAlumno(1);
             
             alumno.setPersona(persona);
             persona.setIdPersona(idPersona);
@@ -141,8 +140,8 @@ public class MatricularAlumnoControlador extends HttpServlet {
             acudiente.setId(idAcudiente);
             
 
-            AlumnoDao usuarioDao = new AlumnoDao();
-            usuarioDao.editarAlumno(alumno);
+            AlumnoDao alumnoDao = new AlumnoDao();
+            alumnoDao.editarAlumno(alumno);
             AcudienteDao acudienteDao = new AcudienteDao();
             acudienteDao.editarAcudiente(acudiente);
 

@@ -59,7 +59,7 @@ public class AcudienteDao {
                 sta.setInt(3, personaId);
                 sta.execute();
                 
-                PreparedStatement stementt = connection.prepareStatement("SELECT Id AS LastID FROM Personas WHERE Id = @@Identity;");
+                PreparedStatement stementt = connection.prepareStatement("SELECT Id AS LastID FROM Acudientes WHERE Id = @@Identity;");
                 stementt.execute();
 
                 ResultSet resultad = stementt.getResultSet();
@@ -114,7 +114,7 @@ public class AcudienteDao {
                 sta.setInt(3, personaId);
                 sta.execute();
                 
-                PreparedStatement stementt = connection.prepareStatement("SELECT Id AS LastID FROM Personas WHERE Id = @@Identity;");
+                PreparedStatement stementt = connection.prepareStatement("SELECT Id AS LastID FROM Acudientes WHERE Id = @@Identity;");
                 stementt.execute();
 
                 ResultSet resultad = stementt.getResultSet();

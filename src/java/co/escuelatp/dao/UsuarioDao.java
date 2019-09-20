@@ -119,8 +119,8 @@ public class UsuarioDao {
     }
 
     public Usuario crearUsuario(Usuario usuario) {
-        String consulta = "insert into Personas(PrimerNombre, SegundoNombre, PrimerApellido, SegundoApellido, TiposDeDocumentoId, NumeroDocumento, GeneroId)\n"
-                + "values (?, ?, ?, ?, ?, ?, ?);";
+        String consulta = "insert into Personas(PrimerNombre, SegundoNombre, PrimerApellido, SegundoApellido, TiposDeDocumentoId, NumeroDocumento, GeneroId, Direccion)\n"
+                + "values (?, ?, ?, ?, ?, ?, ?, ?);";
         PreparedStatement stmt = null;
         try {
             stmt = connection.prepareStatement(consulta);
@@ -131,6 +131,7 @@ public class UsuarioDao {
             stmt.setInt(5, usuario.getTipoDocumento().getId());
             stmt.setString(6, usuario.getNumeroDocumento());
             stmt.setInt(7, usuario.getGenero().getId());
+            stmt.setString(8, usuario.getDireccion());
             stmt.execute();
 
             PreparedStatement stment = connection.prepareStatement("SELECT Id AS LastID FROM Personas WHERE Id = @@Identity;");
@@ -152,7 +153,7 @@ public class UsuarioDao {
                 stement.setInt(6, usuario.getRol().getId());
                 stement.execute();
 
-                PreparedStatement stementt = connection.prepareStatement("SELECT Id AS LastID FROM Personas WHERE Id = @@Identity;");
+                PreparedStatement stementt = connection.prepareStatement("SELECT Id AS LastID FROM Usuarios WHERE Id = @@Identity;");
                 stementt.execute();
 
                 ResultSet resultad = stementt.getResultSet();

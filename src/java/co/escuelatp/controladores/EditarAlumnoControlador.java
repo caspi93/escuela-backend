@@ -113,6 +113,9 @@ public class EditarAlumnoControlador extends HttpServlet {
             persona.setSegundoApellido(segundoApellido);
             tipoDocumento.setId(tipoDoc);
             persona.setTipoDocumento(tipoDocumento);
+            System.out.println("Hello 3: " + tipoDocumento.getId());
+            System.out.println("Hello 4: " + tipoDocumento.getNombreCorto());
+            System.out.println("Hello 5: " + tipoDoc);
             alumno.setTalla(talla);
             alumno.setCategoria(categoria);
             persona.setNumeroDocumento(numeroDocumntoAlumno);
@@ -136,8 +139,8 @@ public class EditarAlumnoControlador extends HttpServlet {
             acudiente.setId(idAcudiente);
             
 
-            AlumnoDao usuarioDao = new AlumnoDao();
-            usuarioDao.editarAlumno(alumno);
+            AlumnoDao alumnoDao = new AlumnoDao();
+            alumnoDao.editarAlumno(alumno);
             AcudienteDao acudienteDao = new AcudienteDao();
             acudienteDao.editarAcudiente(acudiente);
 
